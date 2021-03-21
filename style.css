@@ -1,0 +1,62 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    background: url(images/wp.jpg) no-repeat;
+    background-size: 1500px;
+    height: 100px;
+    background-attachment: fixed;
+    background-position: center;
+    
+}
+
+.header{
+    color:floralwhite;
+    margin-top: 20px;
+    font-size: 80px;
+}
+.country{
+    margin: 20px 10px 0px 50px;
+    border:1px solid goldenrod;
+    background: transparent;
+    border-radius: 25px;
+    width: 300px;
+    padding: 25px;
+    float: left;
+    cursor: pointer;
+    
+    
+}
+
+.country-name{
+    color:wheat;
+    text-align: center;
+    cursor: pointer;
+}
+
+.para{
+    color:cadetblue;
+    text-align: center;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.c-btn{
+    background-color: darkorchid;
+    text-align: center;
+    color:white;
+    width: 65px;
+    height: 35px;
+    border-radius: 10px;
+    border: none;
+    box-shadow: none;
+}
+#countryDetail{
+    color:darksalmon;
+    position: relative;
+}
+#countryDetail img{
+    width: 400px;;
+}

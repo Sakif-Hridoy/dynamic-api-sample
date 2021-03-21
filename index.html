@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body>
+    <h1 class="header text-center">All Countries</h1>
+
+    <div id="countryDetail" class="container text-center">
+
+    </div>
+    <div class="container country-space">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <div id="countries" class="text-center">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        fetch('https://restcountries.eu/rest/v2/all')
+        .then(res=>res.json())
+        .then(data=>{
+            displayCountries(data);
+        })
+
+        const displayCountries = countries=>{
+            const countriesDiv = document.getElementById("countries");
+            for(let i = 0;i<countries.length;i++){
+                const country = countries[i];
+                const countryDiv = document.createElement("div");
+                // const name = document.createElement("h3");
+                // name.innerText = country.name;
+                // const capital  = document.createElement("p");
+                // capital.innerText = country.capital;
+                countryDiv.className = 'country';
+
+                const countryInfo = ` <h3 class="country-name">${country.name}</h3><p class="para">${country.capital}</p>
+                <button onclick="displayCountryDetail('${country.name}')" class="c-btn">Details</button>`;
+                countryDiv.innerHTML = countryInfo;
+
+                // countryDiv.appendChild(name);
+                // countryDiv.appendChild(capital);
+                countriesDiv.appendChild(countryDiv);
+                
+            }
+        }
+
+        function displayCountryDetail(name){
+                const url = `https://restcountries.eu/rest/v2/name/${name}`
+                fetch(url)
+                .then(res=>res.json())
+                .then(data=>renderCountryInfo(data[0]))
+        }
+
+        function renderCountryInfo(country){
+            const detailDiv = document.getElementById("countryDetail");
+            detailDiv.innerHTML = `<h1 class="c-info">Name:${country.name}</h1>
+                                    <p class="c-info">Population:${country.population}</p>
+                                    <p class="c-info">Language:${country.languages[0].name}</p>
+                                    <p class="c-info">Currency:${country.currencies[0].name}</p>
+                                    <p class="c-info">Region:${country.region}</p>
+                                    <img src="${country.flag}">
+            `
+        }
+    </script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+</body>
+</html>
